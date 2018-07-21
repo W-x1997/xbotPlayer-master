@@ -67,6 +67,7 @@ public class MapPresenter implements MapContract.Presenter{
     }
 
 
+
     public void onEvent(final String jsonString) throws JSONException{
 
         mapSize = view.getMapRealSize();
@@ -78,17 +79,18 @@ public class MapPresenter implements MapContract.Presenter{
         final String base64Map = json.getString("data");
 
         Disposable disposable = Observable.just(base64Map)
-                .subscribeOn(Schedulers.computation())
-                .map(new Function<String, Bitmap>() {
+                .subscribeOn(Schedulers.computation())        //子线程computation发射
+                .map(new Function<String, Bitmap>() {      // map 操作符，就是转换输入、输出 的类型；本例中输入是 String, 输出是 Bitmap 类型
                     @Override
                     public Bitmap apply(@io.reactivex.annotations.NonNull String mapInfo) throws Exception {
                         return ImageUtils.decodeBase64ToBitmap(base64Map,1,mapSize);
                     }
                 })
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())       //主线程接受
                 .subscribeWith(new DisposableObserver<Bitmap>() {
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull Bitmap bitmap) {
+
                         log("onNext()");
                         if (!isDisposed()) {
                             view.updateMap(bitmap);
