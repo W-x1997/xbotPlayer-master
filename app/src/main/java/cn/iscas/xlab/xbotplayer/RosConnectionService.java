@@ -129,6 +129,29 @@ public class RosConnectionService extends Service{
             }
         }
 
+        public void manipulatetopic(String topic, boolean isSubscibe) throws JSONException {   //调试测试用
+            if(isConnected()){
+                if(isSubscibe){
+                    JSONObject subpos=new JSONObject();
+                    subpos.put("op","subscribe");
+                    subpos.put("topic",topic);
+                 rosBridgeClient.send(subpos.toString());
+                }
+                else{
+                    JSONObject subpos=new JSONObject();
+                    subpos.put("op","unsubscribde");
+                    subpos.put("topic",topic);
+                    rosBridgeClient.send(subpos.toString());
+
+                }
+            }
+
+            if(topic.equals(Constant.SUBSCRIBE_TOPIC_ROBOT_STATE)){
+                lastUpdateStateTime=System.currentTimeMillis();
+            }
+
+        }
+
 
         /**
          * 发布message控制升降台高度
