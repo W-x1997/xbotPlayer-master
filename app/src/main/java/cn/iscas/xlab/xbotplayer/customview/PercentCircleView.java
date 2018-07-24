@@ -39,7 +39,7 @@ import cn.iscas.xlab.xbotplayer.R;
 
 public class PercentCircleView extends View {
 
-    private int percent = 66;
+    private int percent = 100;
     private int radius;
     private int textSize;
     private int textColor;
