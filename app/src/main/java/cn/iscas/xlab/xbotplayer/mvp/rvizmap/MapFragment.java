@@ -38,6 +38,7 @@ import cn.iscas.xlab.xbotplayer.customview.MapView;
 
 /**
  * Created by lisongting on 2017/10/9.
+ *
  */
 
 public class MapFragment extends Fragment implements MapContract.View{
@@ -68,6 +69,7 @@ public class MapFragment extends Fragment implements MapContract.View{
 
         return view;
     }
+
 
     @Override
     public void onStart() {

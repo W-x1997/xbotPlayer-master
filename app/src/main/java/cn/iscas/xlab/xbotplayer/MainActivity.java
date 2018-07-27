@@ -25,6 +25,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.iscas.xlab.xbotplayer.mvp.cemera.CameraFragment;
+import cn.iscas.xlab.xbotplayer.mvp.descrip.DescripFragment;
 import cn.iscas.xlab.xbotplayer.mvp.robot_state.RobotStateFragment;
 import cn.iscas.xlab.xbotplayer.mvp.rvizmap.MapFragment;
 
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     private int selectedNavItem = 0;
     private TextView pageTitle;
     private ImageButton settingButton;
+
+    private Fragment desFragment;
 
     @TargetApi(23)
     @Override
@@ -89,11 +93,16 @@ public class MainActivity extends AppCompatActivity {
             mapFragment = new MapFragment();
             cameraFragment = new CameraFragment();
             robotStateFragment = new RobotStateFragment();
+
+            desFragment=new DescripFragment();
+
             fragmentManager.beginTransaction()
                     .add(R.id.container, robotStateFragment, robotStateFragment.getClass().getSimpleName())
                     .add(R.id.container, mapFragment, mapFragment.getClass().getSimpleName())
                     .add(R.id.container, cameraFragment, cameraFragment.getClass().getSimpleName())
+                    .add(R.id.container,desFragment,desFragment.getClass().getSimpleName())
                     .commit();
+
             bottomNavigationView.setSelectedItemId(R.id.robot_state);
         } else {
             log("restore savedInstanceState ");
@@ -111,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     bottomNavigationView.setSelectedItemId(R.id.map);
+                    break;
+
+                case 3:
+                    bottomNavigationView.setSelectedItemId(R.id.des);
                     break;
                 default:
                     break;
@@ -160,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentManager.beginTransaction()
                                 .hide(cameraFragment)
                                 .hide(mapFragment)
+                                .hide(desFragment)
                                 .show(robotStateFragment)
                                 .commit();
                         selectedNavItem = 0;
@@ -172,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentManager.beginTransaction()
                                 .hide(mapFragment)
                                 .hide(robotStateFragment)
+                                .hide(desFragment)
                                 .show(cameraFragment)
                                 .commit();
                         selectedNavItem = 1;
@@ -182,10 +197,23 @@ public class MainActivity extends AppCompatActivity {
                         fragmentManager.beginTransaction()
                                 .hide(cameraFragment)
                                 .hide(robotStateFragment)
+                                .hide(desFragment)
                                 .show(mapFragment)
                                 .commit();
                         selectedNavItem = 2;
                         break;
+
+                    case R.id.des:pageTitle.setText("地图test");
+                        mapFragment.hideLoading();
+                        fragmentManager.beginTransaction()
+                                .hide(cameraFragment)
+                                .hide(mapFragment)
+                                .hide(robotStateFragment)
+                                .show(desFragment)
+                                .commit();
+                        selectedNavItem = 3;
+                        break;
+
                     default:
                         break;
                 }

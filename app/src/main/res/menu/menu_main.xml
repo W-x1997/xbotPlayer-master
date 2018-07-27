@@ -30,4 +30,9 @@
         android:id="@+id/map"
         android:icon="@drawable/map"
         android:title="地图" />
+
+    <item
+        android:id="@+id/des"
+        android:icon="@drawable/map"
+        android:title="地图2" />
 </menu>

@@ -15,6 +15,7 @@ import android.util.Size;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
 /**
  * Created by lisongting on 2017/5/10.
  *
@@ -138,7 +139,18 @@ public class ImageUtils {
         byte[] bitmapBytes = Base64.decode(base64Str, Base64.DEFAULT);
         BitmapFactory.Options options = new BitmapFactory.Options();
 
-        options.inSampleSize = inSampleSize;
+
+        options.inJustDecodeBounds = true; // 设置了此属性一定要记得将值设置为false
+
+
+        options.inSampleSize = ImageUtils.calculateInSampleSize(options,128,128);
+        options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+     /* 下面两个字段需要组合使用 */
+        options.inPurgeable = true;
+        options.inInputShareable = true;
+        options.inJustDecodeBounds = false;
+
+      //  options.inSampleSize = inSampleSize;
 
         Bitmap origin = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length,options);
 
@@ -162,5 +174,26 @@ public class ImageUtils {
 
         return BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length,options);
     }
+
+
+    /**
+     * 通过inSampleSize设置缩放倍数，比如写2，即长宽变为原来的1/2，图片就是原来的1/4，如果不进行缩放的话设置为1 但是不能一味的压缩，
+     * 毕竟这个值太小 的话，图片会很模糊，而且要避免图片的拉伸变形，所以需要我们在程序中动态的计算，
+     * 这个 inSampleSize的合适值，而Options中又有这样一个方法：inJustDecodeBounds，将该参数设置为 true后，decodeFiel并不会分配内存空间，但
+     * 是可以计算出原始图片的长宽，调用 options.outWidth/outHeight获取出图片的宽高，然后通过一定的算法，即可得到适合的 inSampleSize
+     */
+//added by wx
+    public static int caculateInSampleSize2(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        int width = options.outWidth;
+        int height = options.outHeight;
+        int inSampleSize = 1;
+        if (width > reqWidth || height > reqHeight) {
+            int widthRadio = Math.round(width * 1.0f / reqWidth);
+            int heightRadio = Math.round(height * 1.0f / reqHeight);
+            inSampleSize = Math.max(widthRadio, heightRadio);
+        }
+        return inSampleSize;
+    }
+
 
 }
