@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
 
-
-    <ImageView
-        android:layout_marginTop="1dp"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/refresh_layout">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:src="@drawable/xbot"/>
-</LinearLayout>
+        android:layout_height="match_parent">
+        <cn.iscas.xlab.xbotplayer.customview.MapView2
+            android:id="@+id/map_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/map_view"
+            android:gravity="center">
+            <Button
+                android:id="@+id/toggleMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bt_selector"
+                android:text="MAP_SHOW"/>
+
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bt_selector"
+                android:text="RESET"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

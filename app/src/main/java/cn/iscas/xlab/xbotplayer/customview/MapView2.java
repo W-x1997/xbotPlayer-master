@@ -14,11 +14,10 @@ import android.view.View;
 import android.view.WindowManager;
 
 /**
- * Created by lisongting on 2017/10/9.
- * MapView:正方形的Rviz地图区域
+ * Created by wx on 2018/7/31.
  */
 
-public class MapView extends View implements View.OnTouchListener{
+public class MapView2 extends View implements View.OnTouchListener{
 
     private static final String TAG = "MapView";
     int width,height;
@@ -26,40 +25,24 @@ public class MapView extends View implements View.OnTouchListener{
     private float scaleX = 1.0F;
     private float scaleY = 1.0F;
     private Bitmap bitmap;
-
-    //两手指的中心点
     private float gestureCenterX = 0;
     private float gestureCenterY = 0;
-
-    //两手指上次的距离
     private double oldDistance;
-    //上次的角度
     private double oldAngle =0;
-    //当前的角度
     private double newAngle =0;
-    //双指连线相于上次的旋转角度
     private float rotateAngle=0;
-
-    //平移的长度
     private float translationX = 0;
     private float translationY = 0;
-
-    //无效果
     private final int MODE_NONE = 0;
-    //缩放
     private final int MODE_SCALE = 1;
-    //旋转
     private final int MODE_ROTATE = 2;
-    //平移
     private final int MODE_DRAG = 3;
-
     private int mode = MODE_NONE;
-
-    public MapView(Context context) {
+    public MapView2(Context context) {
         this(context,null);
     }
 
-    public MapView(Context context, @Nullable AttributeSet attrs) {
+    public MapView2(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         matrix = new Matrix();
         setOnTouchListener(this);
@@ -86,7 +69,7 @@ public class MapView extends View implements View.OnTouchListener{
             log("ScreenSize:" + screenWidth + "X" + screenHeight+",DPI:"+metrics.densityDpi);
 
             if (widthSize < screenWidth && heightSize < screenWidth) {
-                //设置成正方形
+
                 widthSize = widthSize > heightSize ? widthSize : heightSize;
                 heightSize = widthSize;
             }else{
@@ -101,7 +84,6 @@ public class MapView extends View implements View.OnTouchListener{
         setMeasuredDimension(widthSize, heightSize);
 
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -130,26 +112,25 @@ public class MapView extends View implements View.OnTouchListener{
     public void updateMap(Bitmap bitmap) {
         this.bitmap = bitmap;
         postInvalidate();
-
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         int action = event.getActionMasked();
         switch (action) {
-            case MotionEvent.ACTION_DOWN:                        //表示按下了屏幕，第一个执行也是必然执行的方法。-------0
+            case MotionEvent.ACTION_DOWN:
                 getParent().requestDisallowInterceptTouchEvent(true);
                 mode = MODE_NONE;
 
                 break;
-            case MotionEvent.ACTION_POINTER_DOWN:  //  另外的手指按下了屏幕--------------5
+            case MotionEvent.ACTION_POINTER_DOWN:
                 mode = MODE_NONE;
                 oldDistance = getMoveDistance(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
                 oldAngle = getAngle(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
-                gestureCenterX = (event.getX(0) + event.getX(1)) * 0.5F;      //calculate the centre point of (x0,y0) (x1,y1)
+                gestureCenterX = (event.getX(0) + event.getX(1)) * 0.5F;
                 gestureCenterY = (event.getY(0) + event.getY(1)) * 0.5F;
                 break;
-            case MotionEvent.ACTION_MOVE:  //表示为移动手势，会不断的执行直到触摸停止。 --------2
+            case MotionEvent.ACTION_MOVE:
 
                 int pointerCount = event.getPointerCount();
                 if (pointerCount == 2) {
@@ -174,11 +155,11 @@ public class MapView extends View implements View.OnTouchListener{
 
                         double delta = newDistance - oldDistance;
                         if (delta > 0) {
-                            scaleX = 1.05F;
-                            scaleY = 1.05F;
+                            scaleX = 1.03F;
+                            scaleY = 1.03F;
                         } else {
-                            scaleX = 0.95F;
-                            scaleY = 0.95F;
+                            scaleX = 0.97F;
+                            scaleY = 0.97F;
 
                         }
                         mode = MODE_SCALE;
@@ -234,11 +215,7 @@ public class MapView extends View implements View.OnTouchListener{
         //如果第二个点在第一个点下方，则为正弧度，否则为负弧度
         double radian = Math.acos(lenX / lenXY) * (y2 < y1 ? 1 : -1);
         double tmp = Math.round(radian / Math.PI * 180);
-
-       // Log.e("ROTATE_DEGREE",Double.toString(tmp));
-
         return tmp >= 0 ? tmp : tmp + 360;
-
 
     }
 
@@ -251,3 +228,4 @@ public class MapView extends View implements View.OnTouchListener{
 
 
 }
+

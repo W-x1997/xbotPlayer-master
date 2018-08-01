@@ -134,7 +134,7 @@ public class ImageUtils {
     }
 
 
-    //将base64 String解码为Bitmap
+
     public static Bitmap decodeBase64ToBitmap(String base64Str,int inSampleSize,Size expectSize){
         byte[] bitmapBytes = Base64.decode(base64Str, Base64.DEFAULT);
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -151,6 +151,20 @@ public class ImageUtils {
         options.inJustDecodeBounds = false;
 
       //  options.inSampleSize = inSampleSize;
+
+        Bitmap origin = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length,options);
+
+        int width = expectSize.getWidth();
+        int height = expectSize.getHeight();
+        return Bitmap.createScaledBitmap(origin,width,height,true);
+    }
+
+ //将base64 String解码为Bitmap
+    public static Bitmap decodeBase64ToBitmap2(String base64Str,int inSampleSize,Size expectSize){
+        byte[] bitmapBytes = Base64.decode(base64Str, Base64.DEFAULT);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+
+        options.inSampleSize = inSampleSize;
 
         Bitmap origin = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length,options);
 
