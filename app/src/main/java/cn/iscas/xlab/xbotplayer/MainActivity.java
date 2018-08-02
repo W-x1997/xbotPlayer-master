@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private int selectedNavItem = 0;
     private TextView pageTitle;
     private ImageButton settingButton;
+    private ImageButton settingButton2;
 
     private Fragment desFragment;
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         pageTitle = (TextView) findViewById(R.id.page_title);
         settingButton = (ImageButton) findViewById(R.id.setting_button);
+        settingButton2=(ImageButton)findViewById(R.id.set2_button);
 
         //获取状态栏高度，显示一个占位的View(该view和actionbar颜色相同)，达到沉浸式状态栏效果
         View status_bar = findViewById(R.id.status_bar_view);
@@ -225,6 +227,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        settingButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity2.class);
                 startActivity(intent);
             }
         });

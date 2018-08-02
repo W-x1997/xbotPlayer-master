@@ -1,34 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refresh_layout">
+
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="#3266ba"
         android:layout_height="match_parent">
         <cn.iscas.xlab.xbotplayer.customview.MapView2
             android:id="@+id/map_view"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
-            android:layout_width="350dp"
-            android:layout_height="350dp" />
+            android:layout_width="match_parent"
+            android:background="#68c2c2"
+            android:layout_height="800dp" />
+        <!--android:background="#85a9df"-->
+
+        <LinearLayout
+            android:layout_below="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_marginTop="10dp"
+
+               android:layout_marginLeft="60dp"
+                android:layout_weight="1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6㎡"
+                    android:textColor="#ac9b9b"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+                <TextView
+                    android:paddingTop="3dp"
+                 android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                 android:layout_height="wrap_content"
+                 android:text="扫地面积"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="97%"
+                    android:textColor="#ac9b9b"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+                <TextView
+                    android:paddingTop="3dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="剩余电量"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4min"
+                    android:textColor="#ac9b9b"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+                <TextView
+                    android:paddingTop="3dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="清扫时间"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/map_view"
-            android:gravity="center">
+
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
             <Button
                 android:id="@+id/toggleMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/bt_selector"
+                android:background="#909a9b"
                 android:text="MAP_SHOW"/>
 
             <Button
@@ -36,9 +124,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/bt_selector"
+                android:background="#909a9b"
                 android:text="RESET"/>
         </LinearLayout>
 
+
     </RelativeLayout>
+
+
 </android.support.v4.widget.SwipeRefreshLayout>
+
