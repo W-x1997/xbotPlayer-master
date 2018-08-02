@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".SettingsActivity"
                   android:screenOrientation="portrait"/>
+
+        <activity android:name=".SettingsActivity2"/>
         <activity android:name=".mvp.cemera.FullScreenVideoActivity"
             android:screenOrientation="portrait"
                   />

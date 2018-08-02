@@ -11,7 +11,7 @@
         android:background="#3266ba"
         android:layout_height="match_parent">
         <cn.iscas.xlab.xbotplayer.customview.MapView2
-            android:id="@+id/map_view"
+            android:id="@+id/map_view2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
@@ -19,10 +19,19 @@
             android:layout_height="800dp" />
         <!--android:background="#85a9df"-->
 
-        <LinearLayout
-            android:layout_below="@+id/map_view"
+        <ImageView
+            android:layout_below="@+id/map_view2"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#aba5a5"/>
+
+        <LinearLayout
+            android:id="@+id/status_layout"
+            android:layout_below="@+id/map_view2"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
             android:orientation="horizontal"
             >
             <LinearLayout
@@ -74,6 +83,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
@@ -101,6 +111,12 @@
 
 
         </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#aba5a5"
+            android:layout_below="@+id/status_layout"
+            />
 
         <LinearLayout
             android:id="@+id/linear_layout"

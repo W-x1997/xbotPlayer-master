@@ -55,7 +55,7 @@ public class DescripFragment extends Fragment implements MapContract.View{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         log("onCreateView()");
         View view = inflater.inflate(R.layout.fragment_desc,container,false);
-        mapView = (MapView2) view.findViewById(R.id.map_view);
+        mapView = (MapView2) view.findViewById(R.id.map_view2);
         toggleMap = (Button) view.findViewById(R.id.toggleMap);
         resetButton = (Button) view.findViewById(R.id.reset);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
