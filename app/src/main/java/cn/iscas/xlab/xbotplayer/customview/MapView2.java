@@ -105,6 +105,26 @@ public class MapView2 extends View implements View.OnTouchListener{
 
     }
 
+
+    protected void onDraw2(Canvas canvas){
+        super.onDraw(canvas);
+        if(bitmap==null){
+            canvas.drawColor(Color.DKGRAY);
+        }else{
+            if(mode==MODE_ROTATE){
+                matrix.postRotate(rotateAngle,gestureCenterX,gestureCenterY);
+            }else if(mode==MODE_SCALE){
+                matrix.postScale(scaleX,scaleY);
+            }else if(mode==MODE_ROTATE){
+                matrix.postScale(scaleX,scaleY,gestureCenterX,gestureCenterY);
+
+            }
+            canvas.drawBitmap(bitmap,matrix,null);
+            bitmap.recycle();
+
+        }
+    }
+
     public void log(String s) {
         Log.i(TAG, TAG + " -- "+s);
     }

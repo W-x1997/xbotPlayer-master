@@ -15,9 +15,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
-            android:background="#68c2c2"
+            android:background="#646161"
             android:layout_height="800dp" />
-        <!--android:background="#85a9df"-->
+        <!--android:background="#64605e"-->
 
         <ImageView
             android:layout_below="@+id/map_view2"
@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#909a9b"
+                android:background="@drawable/bt_selector"
                 android:text="MAP_SHOW"/>
 
             <Button
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#909a9b"
+                android:background="@drawable/bt_selector"
                 android:text="RESET"/>
         </LinearLayout>
 
