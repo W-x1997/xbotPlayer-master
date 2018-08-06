@@ -38,6 +38,10 @@ public class MapView2 extends View implements View.OnTouchListener{
     private final int MODE_ROTATE = 2;
     private final int MODE_DRAG = 3;
     private int mode = MODE_NONE;
+
+    public Point mLastSinglePoint;
+    boolean mCanTranslate=false; // 单点触控平移，在ACTION_DOWN的时候置位true，ACTION_POINTER_DOWN置为false
+
     public MapView2(Context context) {
         this(context,null);
     }
@@ -105,7 +109,7 @@ public class MapView2 extends View implements View.OnTouchListener{
 
     }
 
-
+/**
     protected void onDraw2(Canvas canvas){
         super.onDraw(canvas);
         if(bitmap==null){
@@ -124,6 +128,7 @@ public class MapView2 extends View implements View.OnTouchListener{
 
         }
     }
+ **/
 
     public void log(String s) {
         Log.i(TAG, TAG + " -- "+s);
@@ -138,19 +143,33 @@ public class MapView2 extends View implements View.OnTouchListener{
     public boolean onTouch(View v, MotionEvent event) {
         int action = event.getActionMasked();
         switch (action) {
-            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_DOWN:   //当屏幕检测到第一个触点按下之后就会触发到这个事件
+                mCanTranslate=true;
                 getParent().requestDisallowInterceptTouchEvent(true);
                 mode = MODE_NONE;
-
+                mLastSinglePoint.x=event.getX();
+                mLastSinglePoint.y=event.getY();
                 break;
-            case MotionEvent.ACTION_POINTER_DOWN:
+
+            case MotionEvent.ACTION_POINTER_DOWN://当屏幕上已经有触点处于按下的状态的时候，再有新的触点被按下时触发
+                mCanTranslate=false;
                 mode = MODE_NONE;
                 oldDistance = getMoveDistance(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
                 oldAngle = getAngle(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
                 gestureCenterX = (event.getX(0) + event.getX(1)) * 0.5F;
                 gestureCenterY = (event.getY(0) + event.getY(1)) * 0.5F;
                 break;
-            case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_MOVE://当触点在屏幕上移动时触发
+
+                //判断能否平移操作
+                if (mCanTranslate) {
+                    float dx = event.getX() - mLastSinglePoint.x;
+                    float dy = event.getY() - mLastSinglePoint.y;
+
+                    translationX = dx/10;
+                    translationY = dy/10;
+                    invalidate();
+                }
 
                 int pointerCount = event.getPointerCount();
                 if (pointerCount == 2) {
@@ -194,12 +213,12 @@ public class MapView2 extends View implements View.OnTouchListener{
                 }
 
                 break;
-            case MotionEvent.ACTION_POINTER_UP:
+            case MotionEvent.ACTION_POINTER_UP:  //当屏幕上有多个点被按住，松开其中一个点时触发
                 oldAngle = newAngle;
                 mode = MODE_NONE;
 
                 break;
-            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_UP:  //当触点松开时被触发
                 mode = MODE_NONE;
                 oldAngle = 0;
                 newAngle = 0;
@@ -246,6 +265,10 @@ public class MapView2 extends View implements View.OnTouchListener{
     }
 
 
+    class Point{
+        public float x;
+        public float y;
+    }
 
 }
 
