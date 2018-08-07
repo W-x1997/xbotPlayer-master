@@ -8,7 +8,7 @@ Features:
 * It can play color and depth live video stream of camera in xbot.   
 * 2D map of real time scene.
 
-Download Link : https://fir.im/vuez
+GitLab:https://yt.droid.ac.cn/beijing/ros-map-view
 
 ## ScreeenShot:
 
