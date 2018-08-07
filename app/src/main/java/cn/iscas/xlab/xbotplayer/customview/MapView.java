@@ -23,8 +23,8 @@ public class MapView extends View implements View.OnTouchListener{
     private static final String TAG = "MapView";
     int width,height;
     Matrix matrix;
-    private float scaleX = 1.0F;
-    private float scaleY = 1.0F;
+    private float scaleX = 0.7F;
+    private float scaleY = 0.7F;
     private Bitmap bitmap;
 
     //两手指的中心点
@@ -204,8 +204,8 @@ public class MapView extends View implements View.OnTouchListener{
                 newAngle = 0;
                 oldDistance = 0;
                 rotateAngle = 0;
-                scaleX=1.0F;
-                scaleY = 1.0F;
+                scaleX=0.7F;
+                scaleY = 0.7F;
                 translationX = 0;
                 translationY = 0;
                 getParent().requestDisallowInterceptTouchEvent(false);

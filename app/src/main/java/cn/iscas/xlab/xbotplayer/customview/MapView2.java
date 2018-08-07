@@ -3,7 +3,6 @@ package cn.iscas.xlab.xbotplayer.customview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -39,7 +38,7 @@ public class MapView2 extends View implements View.OnTouchListener{
     private final int MODE_DRAG = 3;
     private int mode = MODE_NONE;
 
-    public Point mLastSinglePoint;
+    public Point mLastSinglePoint=new Point();
     boolean mCanTranslate=false; // 单点触控平移，在ACTION_DOWN的时候置位true，ACTION_POINTER_DOWN置为false
 
     public MapView2(Context context) {
@@ -94,7 +93,8 @@ public class MapView2 extends View implements View.OnTouchListener{
         super.onDraw(canvas);
 
         if (bitmap == null) {
-            canvas.drawColor(Color.DKGRAY);
+           // canvas.drawColor(Color.DKGRAY);  //646161
+            canvas.drawRGB(100,100,100);
         } else {
             if (mode == MODE_ROTATE) {
                 matrix.postRotate(rotateAngle, gestureCenterX, gestureCenterY);
@@ -166,9 +166,11 @@ public class MapView2 extends View implements View.OnTouchListener{
                     float dx = event.getX() - mLastSinglePoint.x;
                     float dy = event.getY() - mLastSinglePoint.y;
 
-                    translationX = dx/10;
-                    translationY = dy/10;
+                    translationX = dx/15;
+                    translationY = dy/15;
                     invalidate();
+                    matrix.postTranslate(translationX, translationY);
+
                 }
 
                 int pointerCount = event.getPointerCount();
@@ -268,6 +270,10 @@ public class MapView2 extends View implements View.OnTouchListener{
     class Point{
         public float x;
         public float y;
+        Point(){
+            this.x=0;
+            this.y=0;
+        }
     }
 
 }

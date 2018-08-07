@@ -15,9 +15,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
-            android:background="#646161"
+            android:background="#646464"
             android:layout_height="800dp" />
-        <!--android:background="#64605e"-->
+        <!--android:background="#64605e//646161"-->
 
         <ImageView
             android:layout_below="@+id/map_view2"
