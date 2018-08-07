@@ -110,6 +110,7 @@
             </LinearLayout>
 
 
+
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -118,31 +119,153 @@
             android:layout_below="@+id/status_layout"
             />
 
+
         <LinearLayout
             android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:orientation="horizontal"
-
             android:gravity="center"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true">
+          >
             <Button
                 android:id="@+id/toggleMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="45dp"
+
                 android:background="@drawable/bt_w"
                 android:text="MAP_SHOW"/>
 
             <Button
                 android:id="@+id/reset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+
                 android:background="@drawable/bt_w"
                 android:text="RESET"/>
         </LinearLayout>
+
+        <LinearLayout
+           android:layout_marginLeft="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/status_layout"
+            android:id="@+id/control_layout"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:id="@+id/go_where"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:orientation="vertical">
+
+                <ImageView
+                     android:layout_width="60dp"
+                     android:layout_height="60dp"
+                    android:src="@drawable/go"/>
+                <TextView
+                    android:paddingLeft="8dp"
+                    android:paddingTop="3dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="指哪到哪"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/charge"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/power"/>
+                <TextView
+                    android:paddingTop="3dp"
+                    android:textSize="15dp"
+                    android:paddingLeft="20dp"
+                    android:textStyle="bold"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回充"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/sweep"
+                android:layout_weight="1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/sweep"/>
+                <TextView
+                    android:paddingTop="3dp"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:paddingLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="清扫"/>
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/choose_area"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/area2"/>
+                    <TextView
+                        android:paddingTop="3dp"
+                        android:textStyle="bold"
+                        android:paddingLeft="6dp"
+                        android:textSize="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="划区清扫"/>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#aba5a5"
+            android:layout_below="@+id/control_layout"
+            android:layout_margin="5dp"
+            />
 
 
     </RelativeLayout>
