@@ -163,58 +163,66 @@ public class MapView2 extends View implements View.OnTouchListener{
 
                 //判断能否平移操作
                 if (mCanTranslate) {
+                    mode = MODE_DRAG;
                     float dx = event.getX() - mLastSinglePoint.x;
                     float dy = event.getY() - mLastSinglePoint.y;
 
-                    translationX = dx/15;
-                    translationY = dy/15;
+                    translationX = dx/20;
+                    translationY = dy/20;
+                //    invalidate()
+                  //  matrix.postTranslate(translationX, translationY);
+                   // matrix.postTranslate(dx, dy);
+                 //   mLastSinglePoint.x=event.getX();
+                   // mLastSinglePoint.x=event.getY();
+
                     invalidate();
-                    matrix.postTranslate(translationX, translationY);
+                    break;
 
                 }
 
-                int pointerCount = event.getPointerCount();
-                if (pointerCount == 2) {
-                    double newDistance = getMoveDistance(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
-                    newAngle = getAngle(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
-                    float newGestureCenterX = (event.getX(0) + event.getX(1)) * 0.5F;
-                    float newGestureCenterY = (event.getY(0) + event.getY(1)) * 0.5F;
+                    int pointerCount = event.getPointerCount();
+                    if (pointerCount == 2) {
+                        double newDistance = getMoveDistance(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
+                        newAngle = getAngle(event.getX(0), event.getY(0), event.getX(1), event.getY(1));
+                        float newGestureCenterX = (event.getX(0) + event.getX(1)) * 0.5F;
+                        float newGestureCenterY = (event.getY(0) + event.getY(1)) * 0.5F;
 
 //                    log("newDistance:" + newDistance + ",oldDistance:" + oldDistance);
 //                    log("newAngle:" + newAngle + ",oldAngle:" + oldAngle);
-                    if (Math.abs(newAngle - oldAngle) > 10 ) {
-                        rotateAngle = (float) (newAngle - oldAngle);
-                        if (rotateAngle < 0||rotateAngle>270) {
-                            rotateAngle = 2;
-                        } else {
-                            rotateAngle = -2;
-                        }
-                        mode = MODE_ROTATE;
+                        if (Math.abs(newAngle - oldAngle) > 10) {
+                            rotateAngle = (float) (newAngle - oldAngle);
+                            if (rotateAngle < 0 || rotateAngle > 270) {
+                                rotateAngle = 2;
+                            } else {
+                                rotateAngle = -2;
+                            }
+                            mode = MODE_ROTATE;
 //                        log("-------rotate:" + rotateAngle);
-                        invalidate();
-                    } else if (Math.abs(newDistance - oldDistance) > 200 && oldDistance > 0) {
+                            invalidate();
+                        } else if (Math.abs(newDistance - oldDistance) > 70 && oldDistance > 0) {
 
-                        double delta = newDistance - oldDistance;
-                        if (delta > 0) {
-                            scaleX = 1.03F;
-                            scaleY = 1.03F;
-                        } else {
-                            scaleX = 0.97F;
-                            scaleY = 0.97F;
+                            double delta = newDistance - oldDistance;
+                            if (delta > 0) {
+                                scaleX = 1.03F;
+                                scaleY = 1.03F;
+                            } else {
+                                scaleX = 0.97F;
+                                scaleY = 0.97F;
 
-                        }
-                        mode = MODE_SCALE;
+                            }
+                            mode = MODE_SCALE;
 //                        log("-------scale:" + scaleX);
-                        invalidate();
-                    } else if(getMoveDistance(newGestureCenterX, newGestureCenterY,gestureCenterX,gestureCenterY)>100){
-                        mode = MODE_DRAG;
-                        translationX = (newGestureCenterX - gestureCenterX)/10;
-                        translationY = (newGestureCenterY - gestureCenterY)/10;
-                        invalidate();
+                            invalidate();
+                        } else if (getMoveDistance(newGestureCenterX, newGestureCenterY, gestureCenterX, gestureCenterY) > 100) {
+                            mode = MODE_DRAG;
+                            translationX = (newGestureCenterX - gestureCenterX) / 10;
+                            translationY = (newGestureCenterY - gestureCenterY) / 10;
+                            invalidate();
+                        }
                     }
-                }
 
-                break;
+                    break;
+
             case MotionEvent.ACTION_POINTER_UP:  //当屏幕上有多个点被按住，松开其中一个点时触发
                 oldAngle = newAngle;
                 mode = MODE_NONE;
@@ -274,7 +282,12 @@ public class MapView2 extends View implements View.OnTouchListener{
             this.x=0;
             this.y=0;
         }
+
+
     }
+
+
+
 
 }
 

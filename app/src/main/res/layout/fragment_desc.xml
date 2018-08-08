@@ -44,6 +44,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/sweep_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="6㎡"
@@ -71,6 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="97%"
+                    android:id="@+id/power_state"
                     android:textColor="#ac9b9b"
                     android:textStyle="bold"
                     android:textSize="30dp"/>
@@ -97,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="4min"
                     android:textColor="#ac9b9b"
+                    android:id="@+id/sweep_time"
                     android:textStyle="bold"
                     android:textSize="30dp"/>
                 <TextView
