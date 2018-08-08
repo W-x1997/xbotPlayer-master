@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.iscas.xlab.xbotplayer.App;
@@ -46,6 +47,9 @@ public class DescripFragment extends Fragment implements MapContract.View{
     private boolean isMapOpened;
     private SwipeRefreshLayout refreshLayout;
     private RosConnectionReceiver receiver;
+    private TextView sweep_area;   //扫地面积
+    private TextView power; //剩余电量
+    private TextView sweep_time;//  清扫时间
 
     public DescripFragment(){
         log("DescripFragment() Created()");
@@ -59,14 +63,57 @@ public class DescripFragment extends Fragment implements MapContract.View{
         toggleMap = (Button) view.findViewById(R.id.toggleMap);
         resetButton = (Button) view.findViewById(R.id.reset);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
+        sweep_area=(TextView)view.findViewById(R.id.sweep_area);
+        power=(TextView)view.findViewById(R.id.power_state);
+        sweep_time=(TextView)view.findViewById(R.id.sweep_time);
         initView();
         initListeners();
+
+
+         //Linearlayout点击事件
+        View gowhere = view.findViewById(R.id.go_where);                //指哪到哪
+        gowhere.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 具体实现：
+                log("----GOWHERE-----");
+            }
+        });
+
+
+
+        View charge = view.findViewById(R.id.charge);                //回充
+        charge.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 具体实现：
+                log("-----CHARGE----");
+            }
+        });
+
+
+        View sweep = view.findViewById(R.id.sweep);                //清扫
+        sweep.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 具体实现：
+                log("SWEEP:::");
+            }
+        });
+
+
+        View choose_area = view.findViewById(R.id.choose_area);               //划区清扫
+        choose_area.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 具体实现：
+                log("CHOOSE_AREA");
+            }
+        });
 
         return view;
     }
 
 
-    @Override
+
+
+        @Override
     public void onStart() {
         super.onStart();
     }
